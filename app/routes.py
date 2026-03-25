@@ -375,6 +375,18 @@ async def analyze_call_endpoint(
         shutil.copyfileobj(file.file, buffer)
     
     try:
+        # If it's a video file, extract audio using moviepy to avoid long API uploads & timeouts
+        if file.filename.lower().endswith(('.mp4', '.mov', '.avi', '.mkv')):
+            from moviepy import VideoFileClip
+            audio_path = f"{UPLOAD_DIR}/extracted_{int(time.time())}.mp3"
+            try:
+                clip = VideoFileClip(file_path)
+                clip.audio.write_audiofile(audio_path, logger=None)
+                clip.close()
+                file_path = audio_path
+            except Exception as extract_err:
+                print(f"Failed to extract audio from video: {extract_err}")
+                
         result = analyze_audio(file_path, opportunity_id, email)
         return result
     except Exception as e:

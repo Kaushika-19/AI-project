@@ -448,8 +448,23 @@ def get_opportunity_timeline(opportunity_id: str) -> dict:
 def get_pipeline_summary() -> List[dict]:
     """Retrieve the opportunity pipeline summary view."""
     result = (
-        supabase.table("opportunity_pipeline")
-        .select("*")
+        supabase.table("opportunities")
+        .select("*, customers(name)")
         .execute()
     )
-    return result.data
+    
+    pipeline = []
+    if result.data:
+        for row in result.data:
+            customer_data = row.pop("customers", {})
+            if isinstance(customer_data, list):
+                customer_name = customer_data[0].get("name", "Unknown") if customer_data else "Unknown"
+            elif isinstance(customer_data, dict):
+                customer_name = customer_data.get("name", "Unknown")
+            else:
+                customer_name = "Unknown"
+                
+            row["customer_name"] = customer_name
+            pipeline.append(row)
+            
+    return pipeline

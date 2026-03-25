@@ -77,12 +77,12 @@ export default function Dashboard() {
                 </div>
                 <div className="stat-card stat-pipeline">
                     <div className="stat-label">Active Pipeline</div>
-                    <div className="stat-value">${stats.activePipeline.toLocaleString()}</div>
+                    <div className="stat-value">{stats.activePipeline.toLocaleString()}</div>
                     <div className="stat-sub">Across open deals</div>
                 </div>
                 <div className="stat-card stat-won highlighted">
                     <div className="stat-label">Closed Won (YTD)</div>
-                    <div className="stat-value">${stats.wonRevenue.toLocaleString()}</div>
+                    <div className="stat-value">{stats.wonRevenue.toLocaleString()}</div>
                     <div className="stat-sub">Total earned revenue</div>
                 </div>
                 <div className="stat-card stat-convos">
@@ -93,38 +93,7 @@ export default function Dashboard() {
             </div>
 
             <div className="dashboard-grid">
-                {/* Reminders Section */}
-                <div className="card highlight-card" style={{ gridColumn: 'span 2' }}>
-                    <div className="card-header">
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                            <Phone size={20} color="var(--primary)" />
-                            <h3>Today's Communications & Reminders</h3>
-                        </div>
-                        <span className="badge badge-danger">Urgent</span>
-                    </div>
-                    <div className="activity-feed">
-                        {pipeline.map(opp => {
-                            // Find actions for this opportunity that are due today or overdue
-                            // This is a bit simplified, ideally we'd fetch actual /actions endpoint
-                            // But for now, we'll show if the opportunity has high urgency
-                            if (opp.probability > 75 && opp.status === 'IN_PROGRESS') {
-                                return (
-                                    <div key={opp.opportunity_id} className="activity-item" style={{ borderLeft: '3px solid var(--primary)' }}>
-                                        <div className="activity-text">
-                                            <div className="activity-title">Follow up with {opp.customer_name}</div>
-                                            <div className="activity-sub">High value opportunity: ${opp.deal_value.toLocaleString()}</div>
-                                        </div>
-                                        <button className="btn btn-primary" style={{ padding: '6px 12px', fontSize: '0.8rem' }} onClick={() => setIsModalOpen(true)}>Call Now</button>
-                                    </div>
-                                )
-                            }
-                            return null;
-                        })}
-                        {pipeline.filter(o => o.probability > 75).length === 0 && (
-                            <div className="empty-state" style={{ padding: '20px' }}>No high-priority reminders for today.</div>
-                        )}
-                    </div>
-                </div>
+                {/* Reminders Section Removed */}
 
                 <div className="card">
                     <div className="card-header">
@@ -158,7 +127,7 @@ export default function Dashboard() {
                                 <div className="activity-text">
                                     <div className="activity-title">{opp.opportunity_name}</div>
                                     <div className="activity-time">
-                                        {opp.customer_name} &bull; <span style={{ color: "var(--accent-light)" }}>${opp.deal_value.toLocaleString()}</span> &bull; {opp.stage}
+                                        {opp.customer_name} &bull; <span style={{ color: "var(--accent-light)" }}>{opp.deal_value.toLocaleString()}</span> &bull; {opp.stage}
                                     </div>
                                 </div>
                                 <div style={{ display: 'flex', gap: '8px' }}>

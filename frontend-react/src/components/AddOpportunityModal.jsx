@@ -86,7 +86,7 @@ export default function AddOpportunityModal({ isOpen, onClose, onComplete }) {
                             />
                         </div>
                         <div className="detail-item">
-                            <label className="detail-label">Deal Value ($)</label>
+                            <label className="detail-label">Deal Value</label>
                             <input
                                 type="number"
                                 className="filter-select"

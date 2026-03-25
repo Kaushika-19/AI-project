@@ -47,7 +47,6 @@ export default function Customers() {
                             <th>Industry</th>
                             <th>Size</th>
                             <th>Created</th>
-                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -61,15 +60,10 @@ export default function Customers() {
                                 <td><span className="badge badge-muted">{c.industry || 'Unknown'}</span></td>
                                 <td>{c.company_size || 'N/A'}</td>
                                 <td>{new Date(c.created_at).toLocaleDateString()}</td>
-                                <td>
-                                    <button className="btn-icon">
-                                        <MoreVertical size={16} />
-                                    </button>
-                                </td>
                             </tr>
                         ))}
                         {customers.length === 0 && (
-                            <tr><td colSpan="6" style={{ textAlign: 'center', padding: '20px' }}>No customers found.</td></tr>
+                            <tr><td colSpan="5" style={{ textAlign: 'center', padding: '20px' }}>No customers found.</td></tr>
                         )}
                     </tbody>
                 </table>

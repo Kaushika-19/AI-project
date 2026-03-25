@@ -70,7 +70,7 @@ export default function Pipeline() {
                         <div className="opp-details">
                             <div className="opp-detail-item">
                                 <span className="opp-detail-label">Deal Value</span>
-                                <span className="opp-detail-value highlight-value">${opp.deal_value.toLocaleString()}</span>
+                                <span className="opp-detail-value highlight-value">{opp.deal_value.toLocaleString()}</span>
                             </div>
                             <div className="opp-detail-item">
                                 <span className="opp-detail-label">Stage</span>
